@@ -1,4 +1,4 @@
-package Browser;
+package browser;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,9 +13,6 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ChromeTest {
     @Test
