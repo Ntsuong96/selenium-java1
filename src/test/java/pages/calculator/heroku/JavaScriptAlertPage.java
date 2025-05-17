@@ -22,9 +22,6 @@ public class JavaScriptAlertPage {
         }
     }
 
-    public String getAlertText() {
-        return getAlertText();
-    }
     public String getAlertResult() {
         return getText(By.id("result"));
     }

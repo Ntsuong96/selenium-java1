@@ -1,10 +1,7 @@
 package herokuApp;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.calculator.heroku.JavaScriptAlertPage;
@@ -22,11 +19,9 @@ public class JavaScriptAlertTest {
         javaScriptAlertPage.open();
     }
     @Test
-    void verifyClickOnJSAlert() {
-
+    void verifyClickOnJSAlert() throws InterruptedException {
+        Thread.sleep(5000);
         javaScriptAlertPage.clickOnAlertButton("Click for JS Alert");
-        String alertText = javaScriptAlertPage.getAlertText();
-        System.out.println("Alert text: " + alertText);
         javaScriptAlertPage.interactWithAlert("accept");
 
         String resultText = javaScriptAlertPage.getAlertResult();
@@ -37,8 +32,6 @@ public class JavaScriptAlertTest {
     void verifyClickOnJSConfirmWithAccept() {
 
         javaScriptAlertPage.clickOnAlertButton("Click for JS Confirm");
-        String alertText = javaScriptAlertPage.getAlertText();
-        System.out.println("Alert text: " + alertText);
         javaScriptAlertPage.interactWithAlert("accept");
 
         String resultText = javaScriptAlertPage.getAlertResult();
@@ -47,8 +40,6 @@ public class JavaScriptAlertTest {
     @Test
     void verifyClickOnJSConfirmWithDismiss() {
         javaScriptAlertPage.clickOnAlertButton("Click for JS Confirm");
-        String alertText = javaScriptAlertPage.getAlertText();
-        System.out.println("Alert text: " + alertText);
         javaScriptAlertPage.interactWithAlert("dismiss");
 
         String resultText = javaScriptAlertPage.getAlertResult();
@@ -59,8 +50,6 @@ public class JavaScriptAlertTest {
     void verifyClickOnJSPrompt() {
 
         javaScriptAlertPage.clickOnAlertButton("Click for JS Prompt");
-        String alertText = javaScriptAlertPage.getAlertText();
-        System.out.println("Alert text: " + alertText);
         javaScriptAlertPage.setAlertText("Hello");
         javaScriptAlertPage.interactWithAlert("accept");
 
@@ -68,7 +57,7 @@ public class JavaScriptAlertTest {
         Assert.assertTrue(resultText.contains("You entered: Hello"));
     }
 
-    @BeforeMethod
+    @AfterMethod
     public void tearDown() {
         quit();
     }

@@ -26,7 +26,7 @@ public class Browser {
             case "chrome":
                 ChromeOptions chromeOption = new ChromeOptions();
                 chromeOption.addArguments("--headless");
-                driver = new ChromeDriver(chromeOption);
+                driver = new ChromeDriver();
                 break;
             case "firefox":
                 driver = new FirefoxDriver();
