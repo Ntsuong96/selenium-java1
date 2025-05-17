@@ -3,6 +3,7 @@ package herokuApp;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -11,20 +12,12 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 
 public class DropDownTest {
-    /**
-     *
 
-     Open browser
-
-     Navigate to https://the-internet.herokuapp.com/dropdown
-
-     Select "option 1"
-
-     Validate "option 1" is selected
-     */
     @Test
     void tc03(){
-        WebDriver driver = new ChromeDriver();
+        ChromeOptions chromeOption = new ChromeOptions();
+        chromeOption.addArguments("--headless");
+        WebDriver driver = new ChromeDriver(chromeOption);
         driver.navigate().to("https://the-internet.herokuapp.com/dropdown");
 
         Select select = new Select(driver.findElement(By.id("dropdown")));
@@ -35,7 +28,9 @@ public class DropDownTest {
     }
     @Test
     void ableSelectMultipleOptions(){
-        WebDriver driver = new ChromeDriver();
+        ChromeOptions chromeOption = new ChromeOptions();
+        chromeOption.addArguments("--headless");
+        WebDriver driver = new ChromeDriver(chromeOption);
         driver.get("https://output.jsbin.com/osebed/2");
 
         Select select = new Select(driver.findElement(By.id("fruits")));
@@ -52,7 +47,9 @@ public class DropDownTest {
 
     @Test
     void verifyTextFieldDisabled() throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
+        ChromeOptions chromeOption = new ChromeOptions();
+        chromeOption.addArguments("--headless");
+        WebDriver driver = new ChromeDriver(chromeOption);
         driver.get("https://the-internet.herokuapp.com/dropdown");
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

@@ -3,6 +3,7 @@ package herokuApp;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -14,7 +15,9 @@ public class HyperLinkTest {
 
     @Test
     void verifyAbleNaviagteHyperLink() {
-        WebDriver driver = new ChromeDriver();
+        ChromeOptions chromeOption = new ChromeOptions();
+        chromeOption.addArguments("--headless");
+        WebDriver driver = new ChromeDriver(chromeOption);
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         driver.get("https://the-internet.herokuapp.com/status_codes");
