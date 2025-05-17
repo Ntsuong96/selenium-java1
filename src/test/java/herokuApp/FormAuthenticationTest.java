@@ -1,36 +1,38 @@
 package herokuApp;
 
+import common.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+import pages.calculator.heroku.FormAuthenticationPage;
 
-public class FormAuthenticationTest {
-    /**
-     *
-     Open browser
+import java.lang.reflect.Method;
 
-     Navigate to https://the-internet.herokuapp.com/login
+import static utils.Browser.*;
 
-     Fill in username with tomsmith
+public class FormAuthenticationTest extends TestBase {
+    FormAuthenticationPage formAuthenticationPage;
+    @BeforeClass
+    void setup() {
+        openBrowser("chrome");
+        formAuthenticationPage = new FormAuthenticationPage();
+    }
 
-     Fill in the password with SuperSecretPassword!
-
-     Click on Login button
-
-     And the home page is appear
-     */
+    @Parameters({"browser"})
     @Test
-    void tc01(){
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/login");
-        driver.findElement(By.tagName("input")).sendKeys("tomsmith");
+    void tc01(String browser) {
+        formAuthenticationPage
+                .open()
+                .login("tomsmith", "SuperSecretPassword!");
 
-        driver.findElement(By.id("username")).sendKeys("tomsmith");
-        driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!");
+        Assert.assertEquals(getCurrentUrl(), "https://the-internet.herokuapp.com/secure");
+        Assert.assertTrue(formAuthenticationPage.getWelcomeMessage().contains("Welcome to the Secure Area"));
+    }
 
-        driver.findElement(By.cssSelector("[type=submit]")).click();
-        Assert.assertEquals(driver.getCurrentUrl(), "https://the-internet.herokuapp.com/secure");
+    @AfterClass
+    void tearDown(){
+        quit();
     }
 }
